@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import "./LoginForm.css";
 
 const LoginForm = () => {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, formState: {errors} } = useForm();
 
   function onSubmit(data) {
     console.log("Data submitted: ", data);
@@ -17,13 +17,12 @@ const LoginForm = () => {
           type="email"
           id="inputEmail"
           name="email"
-          ref={register({
-            required: "Enter your e-mail",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: "Enter a valid e-mail address",
-            },
-          })}
+          {...register('email', {required: "enter your e-mail", pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+            message: "Enter a valid e-mail address",
+          }})}
+
+          
         />
         {errors.email && <p className="error">{errors.email.message}</p>}
 
@@ -32,7 +31,7 @@ const LoginForm = () => {
           type="password"
           id="inputPassword"
           name="password"
-          ref={register({ required: "Enter your password" })}
+          {...register('password', {required: "Enter your password"})}
         />
         {errors.password && <p className="error">{errors.password.message}</p>}
 
