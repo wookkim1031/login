@@ -1,0 +1,67 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+/* Global variables 
+    ex) font-family: var(--font-arial); */
+:root {
+  --font-arial: Arial, Helvetica, sans-serif;
+  --font-noto-sans-kr: 'Noto Sans KR', sans-serif;
+
+  --color-primary: #1d3b81;
+  --color-secondary: #eaa513;
+  --color-white: #fff;
+  --color-darkgray: #212121;
+  --color-gray: #676767;
+  --color-black: #000;
+  --color-lightgray: #e8e8e9;
+  --color-red: #b90e0a;
+
+  --color-for-list-item-bullet: #eaa513;
+  /* speical use for carousel */
+  --color-primary-opacity-64: #1d3b81a3;
+
+  --breakpoint-min-tablet: 481px;
+  --breakpoint-min-laptop: 769px;
+  --breakpoint-min-desktop: 1025px;
+
+}
+
+.section-contents--margin-x {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+@media only screen and (min-width: 481px) {
+  .section-contents--margin-x {
+    margin-left: 4rem;
+    margin-right: 4rem;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .section-contents--margin-x {
+    margin-left: 8rem;
+    margin-right: 8rem;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .section-contents--margin-x {
+    margin-left: 11rem;
+    margin-right: 11rem;
+  }
+}
+
+@media only screen and (min-width: 1201px) {
+  .section-contents--margin-x {
+    margin-left: 14rem;
+    margin-right: 14rem;
+  }
+}
+
+@media only screen and (min-width: 1401px) {
+  .section-contents--margin-x {
+    margin-left: 16rem;
+    margin-right: 16rem;
+  }
+}

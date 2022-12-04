@@ -1,0 +1,17 @@
+.footer {
+    width: 100%;
+    height: 350px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4rem;
+    background-color: var(--color-lightgray);
+    display: flex;
+    font-family: var(--font-arial);
+    color: var(--color-darkgray);
+    font-weight: normal;
+    font-size: small;
+    line-height: 1.5;
+   
+
+  }
