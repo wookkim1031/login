@@ -1,60 +1,27 @@
-import React from 'react';
-import Modal from 'react-modal';
-import './MainPage.css';
+import React from "react";
 
-const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      background: "#FFFF00"
-    },
-  };
+const Grid = ({ num }) => {
+  return <div>{"a" + num}</div>;
+};
 
-  
-
-const MainPage = ({modalIsOpen, setIsOpen}) => {
-
-    function openModal() {
-        setIsOpen(true);
-      }
-    
-      function afterOpenModal() {
-        console.log('modal opened');
-
-      }
-    
-      function closeModal() {
-        setIsOpen(false);
-      }
-
-    
-    return (
-        <div style={{display:"flex", position:"relative", paddingTop:"1000px", backgroundColor:'skyblue'}}>
-
-        <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        contentLabel="Example Modal"
-        style={customStyles}
-
+const MainPage = () => {
+  return (
+    <div>
+      MAINPAGE
+      <div
+        style={{
+          display: "grid",
+          marginTop: "50px",
+          gridTemplateColumns: "1fr 1fr",
+          rowGap: "20px",
+        }}
       >
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
-      </Modal>
-            
-        </div>
-    );
+        {[...Array(20).keys()].map((item, index) => {
+          return <Grid num={index} key={index} />;
+        })}
+      </div>
+    </div>
+  );
 };
 
 export default MainPage;

@@ -1,0 +1,6 @@
+.layout {
+    display: flex;
+    flex: 1 auto 1;
+    flex-direction: column;
+    width: 100%;
+}

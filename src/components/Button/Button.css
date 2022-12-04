@@ -1,0 +1,20 @@
+.button {
+  font-family: var(--font-arial);
+  color: var(--color-primary);
+  border: none;
+  background-color: white;
+  font-size: 1rem;
+  font-weight: normal;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  padding: 0.7em;
+}
+
+.button:hover {
+  filter: brightness(95%);
+}
+
+.button:active {
+  filter: brightness(80%);
+}

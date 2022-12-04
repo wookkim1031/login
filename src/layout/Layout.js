@@ -1,9 +1,10 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
 import Footer from './Footer';
-import Header from './Header';
 import Modal from 'react-modal';
-import MainPage from '../pages/MainPage';
+import Header from './Header';
+import MainFrame from './MainFrame';
+import './Layout.css'
+
 
 const Layout = () => {
 
@@ -15,9 +16,9 @@ const Layout = () => {
       }
 
     return (
-        <div id="root" >
-            <Header openModal={openModal}/>
-            <Outlet />
+        <div className="layout" >
+            <Header/>
+            <MainFrame />
             <Footer />
         </div>
     );
