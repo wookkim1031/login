@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Header.css';
 import { IconClose, IconHamburgerMenu, KSVLogo } from '../components/Icon/Icon';
 import { Link } from 'react-router-dom';
+import {UserAuth} from '../context/AuthContext'
 import Button from '../components/Button/Button';
 
 
@@ -21,6 +22,15 @@ const Header = () => {
   const navStyle = isMobileNavOpened ? `nav mobile-nav-visible` : `nav`;
   const closeMobileNav = () => setIsMobileNavOpened(false);
   const smoothEffect = isMobileNavOpened ? false : true;
+  const {user, logOut} = UserAuth()
+
+  const handleSignOut = async() => {
+    try {
+      await logOut()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <header className="header">
@@ -51,7 +61,7 @@ const Header = () => {
         </ul>
       </nav>  
       {/* <Contacts> */}
-      <Button text='SIGN IN' onClick={() => console.log('signin clicked')}/>
+    {user?.displayName ? <button onClick={handleSignOut}>Log Out</button>:  (<Link to='/login'>Sign In</Link>)}   
 
       <div className="mobile-nav">
         { !isMobileNavOpened
