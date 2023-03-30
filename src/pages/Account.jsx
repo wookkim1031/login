@@ -1,9 +1,10 @@
 import React from 'react';
 import {UserAuth} from '../context/AuthContext'
+import Profile from './Profile'
 
 const Account = () => {
     const {logOut, user} = UserAuth();
-
+ 
     const handleSignOut = async() => {
         try {
           await logOut()
@@ -19,6 +20,7 @@ const Account = () => {
                 <p>Welcome, {user?.displayName}</p>
             </div>
             <button onClick={handleSignOut}>LogOut</button>
+            {user && <Profile />}
         </div>
     )
 };
