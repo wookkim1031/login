@@ -13,6 +13,8 @@ const navItems = [
   { to: 'communities', itemName: 'Communities'},
   { to: 'jobposting', itemName: 'Job posting'},
   { to: 'donation', itemName: 'Donation'},
+  { to: 'forum', itemName: 'Forum'},
+  { to: 'post', itemName: 'Post'},
 ]
 
 
