@@ -29,6 +29,8 @@ const Account = lazy(() => import('../pages/Account'));
 
 const Router = () => {
   const {user} = UserAuth();
+
+
   return (
     <React.StrictMode>
         <BrowserRouter>

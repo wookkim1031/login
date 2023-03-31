@@ -16,6 +16,20 @@ const Detail = () => {
     }  
     
     return (
-        <div>Detail</div>
+        <div>
+            <div style = {{backgroundImage: `url('${blog?.imgUrl}'}`}}>
+                <div>
+                    <span>{blog?.timestamp.toDate().toDateString()}</span>
+                    <h2>{blog?.title}</h2>
+                </div>
+                <div>
+                    <span>
+                        By <p>{blog?.author}</p>
+                        {blog?.timestamp.toDate().toDateString()}
+                    </span>
+                    <p>{blog?.description} </p>
+                </div>
+            </div>
+        </div>
     )
 }
