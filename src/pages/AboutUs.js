@@ -1,11 +1,8 @@
-import React from 'react';
+import React from "react";
+import Backdrop from "../LoginTesting/Backdrop";
 
 const AboutUs = () => {
-  return (
-    <div>
-      ABOUTUS
-    </div>
-  );
+  return <div>aboutus</div>;
 };
 
 export default AboutUs;
