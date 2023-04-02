@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { UserAuth } from "../context/AuthContext";
 import ReactTagInput from '@pathofdev/react-tag-input';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '@pathofdev/react-tag-input/build/index.css';
 import {db, storage} from "../firebase-config"
 import {ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
-import { addDoc, collection, serverTimestamp} from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp, doc, getDoc, updateDoc} from 'firebase/firestore';
+import { toast } from "react-toastify";
 
 const initialState = {
     title: '',
@@ -30,6 +31,8 @@ const AddEditBlog = () => {
     const [progress, setProgress] = useState(null);
 
     const navigate = useNavigate();
+    
+    const {id} = useParams();
 
     const {title, tags, category, description} = form;
 
@@ -57,6 +60,7 @@ const AddEditBlog = () => {
             }, 
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
+                    toast.info("Image upload to firebase successfully")
                     setForm((prev) => ({...prev, imgUrl: downloadUrl}))
                 })
             }
@@ -65,6 +69,20 @@ const AddEditBlog = () => {
         
         file && uploadFile();
     }, [file]);
+
+    useEffect(() => {
+        id && getBlogDetail();
+    }, [id]);
+
+    const getBlogDetail = async () => {
+        const docRef = doc(db, "blogs",id);
+        const snapshot = await getDoc(docRef);
+        if(snapshot.exists()) {
+            setForm({...snapshot.data()});
+        }
+    }
+
+
     const handleChange = (e) => {
         setForm({...form, [e.target.name]: e.target.value});
     }
@@ -80,16 +98,33 @@ const AddEditBlog = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(category && tags && title && file && description) {
-            try {
-                await addDoc(collection(db, "blogs"), {
-                    ...form,
-                    timestamp: serverTimestamp(),
-                    author: user.displayName,
-                    userId: user.uid
-                })
-            } catch (err) {
-                console.log(err);
-            }
+            if(!id) {
+                try {
+                    await addDoc(collection(db, "blogs"), {
+                        ...form,
+                        timestamp: serverTimestamp(),
+                        author: user.displayName,
+                        userId: user.uid
+                    })
+                    toast.success("Blog created");
+                } catch (err) {
+                    console.log(err);
+                }
+            } else {
+                try {
+                    await updateDoc(doc(db, "blogs",id), {
+                        ...form,
+                        timestamp: serverTimestamp(),
+                        author: user.displayName,
+                        userId: user.uid
+                    })
+                    toast.success("Blog updated");
+                } catch (err) {
+                    console.log(err);
+                }
+            } 
+        } else {
+            return toast.error("All fields are mandatory to fill");
         }
 
         navigate("/");
@@ -97,7 +132,7 @@ const AddEditBlog = () => {
 
     return (
         <div>
-            <div>Forum</div> 
+            <div> {id ? "Update Blog": "Create Blog "}</div> 
             <form onSubmit = {handleSubmit}>
                 <div>
                     <input 
@@ -141,7 +176,7 @@ const AddEditBlog = () => {
                 </div>
                 <div>
                     <button type="submit" disabled ={progress != null && progress < 100}>
-                        Submit
+                        {id ? "Update": "Submit"}
                     </button>
                 </div>
             </form>

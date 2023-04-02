@@ -26,6 +26,9 @@ const Notice = lazy(() => import('../pages/Notice.js'));
 
 const Account = lazy(() => import('../pages/Account'));
 
+const Details = lazy(() => import ('../pages/Details'));
+
+
 
 const Router = () => {
   const {user} = UserAuth();
@@ -45,7 +48,9 @@ const Router = () => {
                 <Route path='aboutus' element={<AboutUs />} />
                 <Route path='notice' element={<Notice />} />
                 <Route path='login' element={<Signin />} />
-                <Route path='post' element={<Post />} />
+                <Route path='post' element={<Post user= {user}/>} />
+                <Route path='detail/:id' element= {<Details />}/>
+                <Route path='/update/:id' element={user?.uid ? <AddEditBlog/> : <Navigate to="/"/>} />
                 <Route path='forum' element={user?.uid ? <AddEditBlog /> : <Navigate to="/"/>} />
                 <Route path='account' 
                 element={
